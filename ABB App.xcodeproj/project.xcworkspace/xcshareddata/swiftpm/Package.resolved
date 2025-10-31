@@ -1,0 +1,15 @@
+{
+  "originHash" : "571c3737038228e513d9e46678d3a98f29e81c8f798956dc813717f52bb04a39",
+  "pins" : [
+    {
+      "identity" : "industrialkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MalkarovPark/IndustrialKit",
+      "state" : {
+        "branch" : "development",
+        "revision" : "20e2100a6457c4513fd702a4d7a404e7fc38e8c3"
+      }
+    }
+  ],
+  "version" : 3
+}
