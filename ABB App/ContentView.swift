@@ -11,6 +11,75 @@ import IndustrialKitUI
 
 struct ContentView: View
 {
+    @State private var selected_tab = 0
+    
+    var body: some View
+    {
+        TabView(selection: $selected_tab)
+        {
+            ConnectView()
+                .tabItem { Text("Connect") }
+                .tag(0)
+            
+            OutputView()
+                .tabItem { Text("Output") }
+                .tag(1)
+            
+            MoveView()
+                .tabItem { Text("Move") }
+                .tag(2)
+        }
+        .padding()
+        .id(selected_tab)
+        .frame(width: frame_size.width, height: frame_size.height)
+    }
+    
+    private var frame_size: CGSize
+    {
+        switch selected_tab
+        {
+        case 0: return CGSize(width: 350, height: 465)
+        case 1: return CGSize(width: 350, height: 200)
+        case 2: return CGSize(width: 350, height: 315)
+        default: return CGSize(width: 320, height: 320)
+        }
+    }
+}
+
+/*struct ContentView: View {
+
+    @State private var size: CGSize = .zero
+
+    var body: some View {
+        GeometryReader { geo in
+            TabView {
+                ConnectView()
+                    .tabItem { Text("Connect") }
+
+                OutputView()
+                    .tabItem { Text("Output") }
+
+                MoveView()
+                    .tabItem { Text("Move") }
+            }
+            .onAppear {
+                updateSize(geo.size)
+            }
+            .onChange(of: geo.size) { newSize in
+                updateSize(newSize)
+            }
+        }
+        .padding()
+    }
+
+    private func updateSize(_ newSize: CGSize) {
+        size = newSize
+        print("Selected tab content size:", newSize)
+    }
+}*/
+
+/*struct ContentView: View
+{
     var body: some View
     {
         TabView
@@ -18,11 +87,10 @@ struct ContentView: View
             ConnectView().tabItem { Text("Connect") }
             OutputView().tabItem { Text("Output") }
             MoveView().tabItem { Text("Move") }
-            //Gripper().tabItem { Text("Gripper") }
         }
         .padding()
     }
-}
+}*/
 
 struct ConnectView: View
 {
@@ -34,8 +102,6 @@ struct ConnectView: View
     
     @State private var toggle_enabled = true
     @State private var perform_connect = false
-    
-    //-----
     
     @State private var ip2: String = "169.254.5.175"
     @State private var port2: String = "5001"
@@ -309,7 +375,7 @@ struct MoveView: View
     @EnvironmentObject var tool_connector: GripperConnector
     
     //@State var position: (x: Float, y: Float, z: Float, r: Float, p: Float, w: Float) = (x: 0, y:0, z:0, r:0, p:90, w:0)
-    @State var position: (x: Float, y: Float, z: Float, r: Float, p: Float, w: Float) = (x: 20, y:30, z:30, r:-97, p:-89, w:-37)
+    @State var position: (x: Float, y: Float, z: Float, r: Float, p: Float, w: Float) = (x: 0, y:0, z:0, r:-97, p:-89, w:-37)
     @State var move_type: MoveType = .fine
     @State var move_speed: Float = 50
     
@@ -418,27 +484,6 @@ struct MoveView: View
             
             button_color = .gray
         }
-    }
-}
-
-struct Gripper: View
-{
-    @State var closed = false
-    
-    var body: some View
-    {
-        Toggle("Closed", isOn: $closed)
-            .toggleStyle(.switch)
-            .padding()
-            .onChange(of: closed)
-            { _, new_value in
-                toggle_gripper(new_value)
-            }
-    }
-    
-    func toggle_gripper(_ closed: Bool)
-    {
-        print(closed)
     }
 }
 

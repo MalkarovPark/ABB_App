@@ -14,8 +14,8 @@
             filePath = "ABB App/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "378"
-            endingLineNumber = "378"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
             landmarkName = "MoveView"
             landmarkType = "14">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "ABB App/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "415"
-            endingLineNumber = "415"
+            startingLineNumber = "481"
+            endingLineNumber = "481"
             landmarkName = "move_to(point:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -31,7 +31,7 @@ nonisolated class GripperConnector: ToolConnector, @unchecked Sendable
             }
             return false
         }
-
+        
         // Extract host and port
         let host = parameters[0].value as! String
         let port: NWEndpoint.Port =
@@ -45,7 +45,7 @@ nonisolated class GripperConnector: ToolConnector, @unchecked Sendable
                 return 5001
             }
         }()
-
+        
         // Reset all connection state before attempting new connection
         await MainActor.run
         {
@@ -53,13 +53,13 @@ nonisolated class GripperConnector: ToolConnector, @unchecked Sendable
             SocketHolder.nw_connection = nil
             SocketHolder.is_ready = false
         }
-
+        
         // Create new TCP connection
         let new_connection = NWConnection(host: NWEndpoint.Host(host), port: port, using: .tcp)
         SocketHolder.nw_connection = new_connection
-
+        
         output += "\n"
-
+        
         // State handler: updates output and connection state safely on MainActor
         @Sendable func handleState(_ state: NWConnection.State) async
         {
@@ -70,25 +70,25 @@ nonisolated class GripperConnector: ToolConnector, @unchecked Sendable
                 case .ready:
                     self.output += "<done: ✅ connection ready>"
                     SocketHolder.is_ready = true
-
+                    
                 case .failed(let error):
                     self.output += "<failed: ❌ connection failed: \(error)>"
                     SocketHolder.nw_connection?.cancel()
                     SocketHolder.nw_connection = nil
                     SocketHolder.is_ready = false
-
+                    
                 case .waiting(let error):
                     self.output += "<failed: ⚠️ connection waiting: \(error)>"
                     SocketHolder.nw_connection?.cancel()
                     SocketHolder.nw_connection = nil
                     SocketHolder.is_ready = false
-
+                    
                 default:
                     break
                 }
             }
         }
-
+        
         // Assign the state update handler
         new_connection.stateUpdateHandler = { state in
             Task
@@ -96,13 +96,13 @@ nonisolated class GripperConnector: ToolConnector, @unchecked Sendable
                 await handleState(state)
             }
         }
-
+        
         // Start the connection
         new_connection.start(queue: SocketHolder.nw_queue)
-
+        
         // Timeout handling: wait max 1 second
         try? await Task.sleep(nanoseconds: 1_000_000_000)
-
+        
         if !SocketHolder.is_ready
         {
             await MainActor.run
@@ -113,7 +113,7 @@ nonisolated class GripperConnector: ToolConnector, @unchecked Sendable
                 SocketHolder.is_ready = false
             }
         }
-
+        
         // Return final connection status
         return SocketHolder.is_ready
     }
