@@ -376,6 +376,7 @@ struct MoveView: View
     
     //@State var position: (x: Float, y: Float, z: Float, r: Float, p: Float, w: Float) = (x: 0, y:0, z:0, r:0, p:90, w:0)
     @State var position: (x: Float, y: Float, z: Float, r: Float, p: Float, w: Float) = (x: 0, y:0, z:0, r:-97, p:-89, w:-37)
+    //@State var position: (x: Float, y: Float, z: Float, r: Float, p: Float, w: Float) = (x: 20, y: 40, z: 50, r: 0, p: 90, w: 0)
     @State var move_type: MoveType = .fine
     @State var move_speed: Float = 50
     
