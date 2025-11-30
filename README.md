@@ -1,6 +1,6 @@
 <!-- ![rcw_caption](https://github.com/user-attachments/assets/63669580-0188-489a-b658-cc7a17623fe9) -->
 <!-- <img width="2880" height="1200" alt="abb_app_caption" src="https://github.com/user-attachments/assets/39fbdce7-6cbf-489b-b6bf-ccb8709b7411" /> -->
-![abb_app_caption](https://github.com/user-attachments/assets/63669580-0188-489a-b658-cc7a17623fe9](https://github.com/user-attachments/assets/39fbdce7-6cbf-489b-b6bf-ccb8709b7411)
+![abb_app_caption]()
 
 # ABB App
 
